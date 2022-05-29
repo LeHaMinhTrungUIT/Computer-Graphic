@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Đồ án ĐHMT</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<input type="file" accept="image/*" id="texture" style="display: none;"
+			onchange="SetTexture(window.URL.createObjectURL(this.files[0]))" />
+	
+	<div id="rendering" class="w-100 h-100 position-fixed">
+	</div>
+	<nav class="navbar navbar-expand-lg" style="background-color: rgb(243, 235, 161); color: black">
+		<a class="navbar-brand" href="#" style="color: black">Đồ hoạ máy tính</a>
+		
+		<button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		  <span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse " id="navbarNav">
+		  <ul class="navbar-nav ">			
+			<li class="nav-item dropdown mr-3">
+				<a class="nav-link dropdown-toggle mr-1" href="#" id="geometryDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					
+					<font color=black>Geometry</font>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="geometryDropdownMenuLink">
+					<a href="#" class="dropdown-item" onclick="RenderGeo(1);">Cube</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(2);">Sphere</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(3);">Cone</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(4);">Cylinder</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(5);">Torus</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(6);">TorusKnot</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(7);">Teapot</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(8);">Icosahedron</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(9);">Dodecahedron</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(10);">Octahedron</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(11);">Tetrahedron</a>
+					<a href="#" class="dropdown-item" onclick="RenderGeo(12);">Text</a>
+					
+				</div>
+			</li>
+			<li class="nav-item dropdown mr-3">
+				<a class="nav-link dropdown-toggle mr-1" href="#" id="surfaceDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<font color=black>Surface</font>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="surfaceDropdownMenuLink">
+					<a href="#" class="dropdown-item" onclick="SetMaterial(1);">Point</a>
+					<a href="#" class="dropdown-item" onclick="SetMaterial(2);">Line</a>
+					<a href="#" class="dropdown-item" onclick="SetMaterial(3);">Solid</a>
+					<a href="#" class="dropdown-item" name="button" onclick="Uploadimage();">Texture</a>
+					
+				</div>
+			</li>
+			<li class="nav-item dropdown mr-3">
+				<a class="nav-link dropdown-toggle mr-1" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<font color="black">Light</font>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a href="#" class="dropdown-item" onclick="SetPointLight()">Light</a>
+					<a href="#" class="dropdown-item" onclick="RemoveLight()">Remove Light</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown mr-3">
+				<a class="nav-link dropdown-toggle mr-1" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<font color=black>Animation</font>
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<a href="#" class="dropdown-item" onclick="Animation1()">Vertical Rotate</a>
+					<a href="#" class="dropdown-item" onclick="Animation2()">Horizontal Rotate</a>
+					<a href="#" class="dropdown-item" onclick="Animation3()">Auto Rotate</a>
+					<a href="#" class="dropdown-item" onclick="Animation4()">Collision</a>
+					<a href="#" class="dropdown-item" onclick="Animation6()">Bouncy</a>
+					<a href="#" class="dropdown-item" onclick="Animation5()">Juggle</a>
+					<a href="#" class="dropdown-item" onclick="Animation7()">Roll</a>
+					<a href="#" class="dropdown-item" onclick="ResetAnimation()">Reset</a>
+				</div>
+			</li>		
+			
+		  </ul>
+		</div>
+	</nav>
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+	<script type="module" src="./index.js"></script>
+
+</body>
+
+</html>
