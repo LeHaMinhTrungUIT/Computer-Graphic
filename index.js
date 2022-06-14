@@ -3,7 +3,7 @@ import { gui, GUI } from "./js/dat.gui.module.js";
 import { OrbitControls } from "./js/OrbitControls.js";
 import { TransformControls } from "./js/TransformControls.js";
 import { TeapotBufferGeometry } from "./js/TeapotBufferGeometry.js";
-
+import { GLTFLoader } from "./js/GLTFLoader.js";
 var camera, scene, renderer, control, orbit;
 var mesh, texture;
 var raycaster, light, PointLightHelper, meshplan;
@@ -44,6 +44,39 @@ var DodecahedronGeometry = new THREE.DodecahedronBufferGeometry(16);
 var IcosahedronGeometry = new THREE.IcosahedronBufferGeometry(17);
 var OctahedronGeometry = new THREE.OctahedronBufferGeometry(15);
 var TetrahedronGeometry = new THREE.TetrahedronBufferGeometry(25);
+const loader1 = new GLTFLoader();
+loader1.load("./model/Soldier.glb", function (gltf) {
+  model = gltf.scene;
+  scene.add(model);
+
+  model.traverse(function (object) {
+    if (object.isMesh) object.castShadow = true;
+  });
+  skeleton = new THREE.SkeletonHelper(model);
+  skeleton.visible = false;
+  scene.add(skeleton);
+
+  //
+
+  createPanel();
+
+  //
+
+  const animations = gltf.animations;
+
+  mixer = new THREE.AnimationMixer(model);
+
+  idleAction = mixer.clipAction(animations[0]);
+  walkAction = mixer.clipAction(animations[3]);
+  runAction = mixer.clipAction(animations[1]);
+
+  actions = [idleAction, walkAction, runAction];
+
+  activateAllActions();
+
+  animate();
+});
+
 const points = [];
 var twoPi = Math.PI * 2;
 for (let i = 0; i < 10; i++) {
@@ -76,7 +109,7 @@ function init() {
   var camera_y = 50;
   var camera_z = 100;
   camera = new THREE.PerspectiveCamera(
-    75,
+    100,
     window.innerWidth / window.innerHeight,
     0.1,
     10000
@@ -313,7 +346,7 @@ function RenderGeo(id) {
       mesh = new THREE.Mesh(TorusGeometry, material);
       break;
     case 6:
-      mesh = new THREE.Mesh(TorusKnotGeometry, material);
+      mesh = new THREE.Mesh(loader1);
       break;
     case 7:
       mesh = new THREE.Mesh(TeapotGeometry, material);
@@ -396,6 +429,26 @@ function control_transform(mesh) {
 }
 
 // 3.Light
+function MoveLight() {
+  let count = 0;
+  setInterval(() => {
+    light.position.y += Math.sin(count);
+    light.position.x += Math.cos(count);
+    count += Math.PI / 48;
+    console.log(light.position.y);
+  }, 500);
+  render();
+}
+window.MoveLight = MoveLight;
+function StopMoveLight() {
+  setInterval(() => {
+    light.position.y = 30;
+    light.position.x = 30;
+  }, 1);
+
+  render();
+}
+window.StopMoveLight = StopMoveLight;
 function SetPointLight() {
   light = scene.getObjectByName("pl1");
   if (!light) {
@@ -411,16 +464,12 @@ function SetPointLight() {
       scene.add(meshplan);
     }
 
-    const intensity = 1;
-    light = new THREE.PointLight(parameters, intensity);
+    const intensity = 1.2;
+    light = new THREE.PointLight(parameters, intensity, 200);
     light.castShadow = true;
     light.position.x = -20;
-    light.position.y = 30;
-    setInterval(() => {
-      light.position.y += 10;
-      if (light.position.y > 100) light.position.y = 0;
-      console.log(light.position.y);
-    }, 1000);
+    light.position.y = 50;
+
     light.position.z = 30;
     light.name = "pl1";
     scene.add(light);

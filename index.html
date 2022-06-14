@@ -38,7 +38,7 @@
 					<a href="#" class="dropdown-item" onclick="RenderGeo(3);">Cone</a>
 					<a href="#" class="dropdown-item" onclick="RenderGeo(4);">Cylinder</a>
 					<a href="#" class="dropdown-item" onclick="RenderGeo(5);">Torus</a>
-					<a href="#" class="dropdown-item" onclick="RenderGeo(6);">TorusKnot</a>
+					<!-- <a href="#" class="dropdown-item" onclick="RenderGeo(6);">Character</a> -->
 					<a href="#" class="dropdown-item" onclick="RenderGeo(7);">Teapot</a>
 					<a href="#" class="dropdown-item" onclick="RenderGeo(8);">Icosahedron</a>
 					<a href="#" class="dropdown-item" onclick="RenderGeo(9);">Dodecahedron</a>
@@ -66,6 +66,8 @@
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 					<a href="#" class="dropdown-item" onclick="SetPointLight()">Light</a>
+					<a href="#" class="dropdown-item" onclick="MoveLight()">Move Light</a>
+					<a href="#" class="dropdown-item" onclick="StopMoveLight()">Stop Move Light</a>
 					<a href="#" class="dropdown-item" onclick="RemoveLight()">Remove Light</a>
 				</div>
 			</li>
@@ -83,7 +85,9 @@
 					<a href="#" class="dropdown-item" onclick="Animation7()">Roll</a>
 					<a href="#" class="dropdown-item" onclick="ResetAnimation()">Reset</a>
 				</div>
-			</li>		
+			</li>
+			<li><a class="nav-link dropdown-toggle mr-1" href="./demo.html" id="navbarDropdownMenuLink"  aria-haspopup="true" aria-expanded="false">
+				<font color=black>Final Demo</font></li>		
 			
 		  </ul>
 		</div>
